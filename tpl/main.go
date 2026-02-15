@@ -119,10 +119,16 @@ func initConfig() {
 }
 
 func AddCommandTemplate() []byte {
-	return []byte(`/*
+	return []byte(`{{ if or (.Legal.Header) (ne 0 (len .Project.Copyright)) -}}
+// Package cmd
+/*
+{{ if ne 0 (len .Project.Copyright) -}}
 {{ .Project.Copyright }}
-{{ if .Legal.Header }}{{ .Legal.Header }}{{ end }}
+{{ if .Legal.Header }}{{ printf "\n" }}{{ end }}{{ end -}}
+{{ if .Legal.Header }}{{ if eq "\n" (slice .Legal.Header 0 1) }}{{- slice .Legal.Header 1 }}{{else}}{{ .Legal.Header }}{{ end }}
+{{ end -}}
 */
+{{ end -}}
 package cmd
 
 import (

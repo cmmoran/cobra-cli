@@ -84,7 +84,7 @@ func copyrightLine() string {
 	if year == "" {
 		year = time.Now().Format("2006")
 	}
-	if len(author) > 0 {
+	if author != "NAME HERE <EMAIL ADDRESS>" {
 		return "Copyright © " + year + " " + author
 	}
 
