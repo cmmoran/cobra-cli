@@ -84,8 +84,11 @@ func copyrightLine() string {
 	if year == "" {
 		year = time.Now().Format("2006")
 	}
+	if len(author) > 0 {
+		return "Copyright © " + year + " " + author
+	}
 
-	return "Copyright © " + year + " " + author
+	return ""
 }
 
 // findLicense looks for License object of built-in licenses.
